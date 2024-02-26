@@ -21,6 +21,11 @@ def print_tasks(tasks):
     else:
         for index, task in enumerate(tasks):
             print(f"{index + 1}. {task.strip()}")
+def mark_task_as_completed(tasks, task_index):
+    if task_index < len(tasks):
+        tasks[task_index] = f"COMPLETED: {tasks[task_index].strip()}\n"
+    else:
+        print("Invalid task number.")
 
 def main():
     filename = "tasks.txt"
@@ -31,7 +36,8 @@ def main():
         print("1. Add task")
         print("2. Remove task")
         print("3. View tasks")
-        print("4. Exit")
+        print("4. Mark task as completed")
+        print("5. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -45,6 +51,10 @@ def main():
         elif choice == "3":
             print_tasks(tasks)
         elif choice == "4":
+            print_tasks(tasks)
+            task_index = int(input("Enter the task number to mark as completed: ")) - 1
+            mark_task_as_completed(tasks, task_index)
+        elif choice == "5":
             save_tasks(filename, tasks)
             print("Exiting...")
             break
